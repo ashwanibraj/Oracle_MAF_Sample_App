@@ -1,0 +1,12 @@
+<References xmlns="http://xmlns.oracle.com/adf/jndi">
+  <Reference name="HRRESTConn" className="oracle.adf.model.connection.rest.RestConnection" xmlns="">
+    <Factory className="oracle.adf.model.connection.rest.RestConnectionFactory"/>
+    <RefAddresses>
+      <XmlRefAddr addrType="HRRESTConn">
+        <Contents>
+          <restconnection name="HRRESTConn" url="http://10.10.73.116:7101/HRRest/persistence/v1.0/Model-1"/>
+        </Contents>
+      </XmlRefAddr>
+    </RefAddresses>
+  </Reference>
+</References>

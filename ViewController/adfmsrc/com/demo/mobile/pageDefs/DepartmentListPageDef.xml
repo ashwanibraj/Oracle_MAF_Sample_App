@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.22.33" id="DepartmentListPageDef"
+                Package="com.demo.mobile.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables">
+      <variable Name="find_searchValue" Type="java.lang.String"/>
+    </variableIterator>
+    <iterator id="DepartmentServiceIterator" Binds="root" DataControl="DepartmentService" RangeSize="25"/>
+    <accessorIterator id="departmentIterator" MasterBinding="DepartmentServiceIterator" Binds="department"
+                      BeanClass="com.demo.application.model.Department" DataControl="DepartmentService" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <action id="IteratorDepartment" RequiresUpdateModel="true" Action="createRow" IterBinding="departmentIterator"/>
+    <methodAction id="findDepartment" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findDepartment"
+                  DataControl="DepartmentService" InstanceName="data.DepartmentService.dataProvider"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="searchValue" NDValue="${bindings.find_searchValue}" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues id="searchValue" IterBinding="variables">
+      <AttrNames>
+        <Item Value="find_searchValue"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="department" IterBinding="departmentIterator">
+      <nodeDefinition Name="department0" DefName="com.demo.application.model.Department">
+        <AttrNames>
+          <Item Value="departmentName"/>
+          <Item Value="departmentId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="findAllDepartmentRemote" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="findAllDepartmentRemote" DataControl="DepartmentService"
+                  InstanceName="data.DepartmentService.dataProvider" IsViewObjectMethod="false"/>
+    <methodAction id="synchronize" RequiresUpdateModel="true" Action="invokeMethod" MethodName="synchronize"
+                  DataControl="DepartmentService" InstanceName="data.DepartmentService.dataProvider"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="inBackground" NDValue="true" NDType="java.lang.Boolean"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

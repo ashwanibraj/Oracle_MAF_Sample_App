@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.22.33" id="EmployeePageDef"
+                Package="com.demo.mobile.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator id="DepartmentServiceIterator" Binds="root" DataControl="DepartmentService" RangeSize="25"/>
+    <accessorIterator id="departmentIterator" MasterBinding="DepartmentServiceIterator" Binds="department"
+                      BeanClass="com.demo.application.model.Department" DataControl="DepartmentService" RangeSize="25"/>
+    <accessorIterator id="employeesIterator" MasterBinding="departmentIterator" Binds="employees"
+                      BeanClass="com.demo.application.model.Employee" DataControl="DepartmentService" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <attributeValues id="isNewEntity" IterBinding="employeesIterator">
+      <AttrNames>
+        <Item Value="isNewEntity"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="saveDepartment" RequiresUpdateModel="true" Action="invokeMethod" MethodName="saveDepartment"
+                  DataControl="DepartmentService" InstanceName="data.DepartmentService.dataProvider"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="entity" NDValue="#{bindings.departmentIterator.currentRow.dataProvider}"
+                 NDType="com.demo.application.model.Department"/>
+    </methodAction>
+    <attributeValues id="email" IterBinding="employeesIterator">
+      <AttrNames>
+        <Item Value="email"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="employeeId" IterBinding="employeesIterator">
+      <AttrNames>
+        <Item Value="employeeId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="firstName" IterBinding="employeesIterator">
+      <AttrNames>
+        <Item Value="firstName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="hireDate" IterBinding="employeesIterator">
+      <AttrNames>
+        <Item Value="hireDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="jobId" IterBinding="employeesIterator">
+      <AttrNames>
+        <Item Value="jobId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="lastName" IterBinding="employeesIterator">
+      <AttrNames>
+        <Item Value="lastName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="phoneNumber" IterBinding="employeesIterator">
+      <AttrNames>
+        <Item Value="phoneNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="salary" IterBinding="employeesIterator">
+      <AttrNames>
+        <Item Value="salary"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="departmentDepartmentId" IterBinding="employeesIterator">
+      <AttrNames>
+        <Item Value="departmentDepartmentId"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="DeleteEmployee" RequiresUpdateModel="false" Action="removeCurrentRow" IterBinding="employeesIterator"/>
+    <methodAction id="synchronize" RequiresUpdateModel="true" Action="invokeMethod" MethodName="synchronize"
+                  DataControl="DepartmentService" InstanceName="data.DepartmentService.dataProvider"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="inBackground" NDValue="true" NDType="java.lang.Boolean"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

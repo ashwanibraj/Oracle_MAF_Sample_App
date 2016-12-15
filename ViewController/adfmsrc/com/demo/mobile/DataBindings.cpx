@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.2.1.22.33" id="DataBindings"
+             SeparateXMLFiles="false" Package="com.demo.mobile" ClientType="Generic">
+  <pageMap>
+    <page path="/Department/DepartmentList.amx" usageId="com_demo_mobile_pageDefs_DepartmentListPageDef"/>
+    <page path="/Department/Department.amx" usageId="com_demo_mobile_pageDefs_DepartmentPageDef"/>
+    <page path="/Department/Employee.amx" usageId="com_demo_mobile_pageDefs_EmployeePageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="com_demo_mobile_pageDefs_DepartmentListPageDef" path="com.demo.mobile.pageDefs.DepartmentListPageDef"/>
+    <page id="com_demo_mobile_pageDefs_DepartmentPageDef" path="com.demo.mobile.pageDefs.DepartmentPageDef"/>
+    <page id="com_demo_mobile_pageDefs_EmployeePageDef" path="com.demo.mobile.pageDefs.EmployeePageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <dc id="DepartmentService" path="com.demo.application.DepartmentService"/>
+  </dataControlUsages>
+</Application>

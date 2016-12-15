@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfmf:application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:adfmf="http://xmlns.oracle.com/adf/mf"
+                   version="1.0" name="SampleMobileApp" id="com.company.SampleMobileApp"
+                   appControllerFolder="ApplicationController"
+                   listener-class="oracle.maf.impl.cdm.lifecycle.InitDBLifeCycleListener">
+  <adfmf:featureReference refId="Department" id="fr2"/>
+  <adfmf:featureReference refId="oracle.maf.impl.cdm.datasynch" id="oracle.maf.impl.cdm.datasynch"
+                          showOnNavigationBar="false" showOnSpringboard="false"/>
+  <adfmf:featureReference refId="oracle.maf.impl.cdm.wscalls" id="fr3"/>
+  <adfmf:featureReference refId="com.demo.Department" id="fr1"/>
+</adfmf:application>

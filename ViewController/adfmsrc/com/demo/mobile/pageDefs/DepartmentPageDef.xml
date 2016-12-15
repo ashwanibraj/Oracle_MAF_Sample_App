@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.22.33" id="DepartmentPageDef"
+                Package="com.demo.mobile.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator id="DepartmentServiceIterator" Binds="root" DataControl="DepartmentService" RangeSize="25"/>
+    <accessorIterator id="departmentIterator" MasterBinding="DepartmentServiceIterator" Binds="department"
+                      BeanClass="com.demo.application.model.Department" DataControl="DepartmentService" RangeSize="25"/>
+    <accessorIterator id="employeesIterator" MasterBinding="departmentIterator" Binds="employees"
+                      BeanClass="com.demo.application.model.Employee" DataControl="DepartmentService" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <attributeValues id="isNewEntity" IterBinding="departmentIterator">
+      <AttrNames>
+        <Item Value="isNewEntity"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="saveDepartment" RequiresUpdateModel="true" Action="invokeMethod" MethodName="saveDepartment"
+                  DataControl="DepartmentService" InstanceName="data.DepartmentService.dataProvider"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="entity" NDValue="#{bindings.departmentIterator.currentRow.dataProvider}"
+                 NDType="com.demo.application.model.Department"/>
+    </methodAction>
+    <attributeValues id="departmentId" IterBinding="departmentIterator">
+      <AttrNames>
+        <Item Value="departmentId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="departmentName" IterBinding="departmentIterator">
+      <AttrNames>
+        <Item Value="departmentName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="locationId" IterBinding="departmentIterator">
+      <AttrNames>
+        <Item Value="locationId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="employeeEmployeeId" IterBinding="departmentIterator">
+      <AttrNames>
+        <Item Value="employeeEmployeeId"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="employees" IterBinding="employeesIterator">
+      <nodeDefinition Name="employees0" DefName="com.demo.application.model.Employee">
+        <AttrNames>
+          <Item Value="lastName"/>
+          <Item Value="firstName"/>
+          <Item Value="email"/>
+          <Item Value="phoneNumber"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="DeleteDepartment" RequiresUpdateModel="false" Action="removeCurrentRow"
+            IterBinding="departmentIterator"/>
+    <action id="IteratorEmployee" RequiresUpdateModel="true" Action="createRow" IterBinding="employeesIterator"/>
+    <methodAction id="synchronize" RequiresUpdateModel="true" Action="invokeMethod" MethodName="synchronize"
+                  DataControl="DepartmentService" InstanceName="data.DepartmentService.dataProvider"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="inBackground" NDValue="true" NDType="java.lang.Boolean"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>
